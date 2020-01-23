@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="script.js"></script>
+    <script src= 
+    "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"> 
+        </script> 
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+    .inicio{
+        width: 0%;
+    }
+    .final{
+        width: 50%;
+    } 
+    .animacion{
+        transition: all 2s ease .5s; 
+    }
+    .menu-iconos{
+        width: 45px;
+    }
+    .navbar{
+        margin-bottom: 0;
+        border-radius: 0;
+        background-color: #ffffff;
+        padding: 1% 0;
+        font-size: 1.2em;
+        padding: 1% 0;
+        font-size: 1.2em;
+        border: 0;
+        float: center;
+
+    }
+   .navbar-brand{
+        float: left;
+        min-height: 30px;
+        padding: 0 15px 15px;
+    }
+    .navbar-collapse .navbar-nav .active a, .navbar-collapse .navbar-nav .active a:focus, .navbar-collapse .navbar-nav .active a:hover{
+        color: #ffffff;
+        background-color: #f5f6f8;
+
+    }
+    .card{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 250px;
+    }
+
+    
+
+    </style>
+
+  </head>
+  <body>
+   
+    <script src="script.js"></script>
+      <nav class="navbar navbar-expand-lg navbar-dark ">
+            <a class="navbar-brand" href="#"><img src="http://www.rcjoyeros.com/imagenes/mp.png" width="220" height="72"></a>
+            <a class="navbar-brand" href="#"></a>
+        
+    
+
+            </div>
+        </nav>
+
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <h1 class="display-4 text-center">Mercado Pago QR</h1>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-lg my-2" placeholder="Ingresar external" id="external">
+                            <input type="number" class="form-control form-control-lg my-3" placeholder="Ingresar monto" id="pruebamonto">
+                <!--           <button class="btn btn-success my-2" type="button" onclick= qrcomprador() id="post-btn" onclick=setTimeout(function(){window.location.reload();},10)>Cobrar</button> -->
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        var indep = Math.floor(Math.random() * 1000000000000000000); 
+        console.log("indep: " + indep)
+        </script>
+
+
+
+   
+
+<!-- Button trigger modal -->
+    <div class="container py-2">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop" onclick= modal()>
+             Cobrar
+             </button>
+             <div class="dropdown py-2">
+                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" hidden>
+                      Cajas
+                    </a>                  
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="cajas">
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+  
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Cobrar con Mercado Pago</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h2>
+                    Esperando QR...
+                </h2>
+                    <input type="password"  class="form-control form-control-lg my-3"  id="escaneo" >
+                </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button class="btn btn-success my-2" type="button" id="post-btn" hidden >Cobrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+      <script>
+        function modal(){
+        $('#staticBackdrop').on('shown.bs.modal', function() {
+            $(this).find('input:first').focus();
+        });
+        }
+      </script>
+
+<script>  
+        $("#escaneo").keypress(function(event) { 
+            if (event.keyCode === 13) { 
+                $("#post-btn").click(); 
+            } 
+        }); 
+        $("#post-btn").click(function qrcomprador(){
+
+                let monto = document.getElementById('pruebamonto').value;
+                let external = document.getElementById('external').value;
+                let input = document.getElementById('escaneo').value;
+                let strbody = JSON.stringify({
+                        "binary_mode": true,
+                        "disbursements": [
+                                {
+                                "collector_id": "493533927"
+                                }
+                        ],
+                        "payer": {
+                            "token": input
+
+                        },
+                        "external_pos_id": "STORE01POS01",
+                        "wallet_payment": {
+                            "description": external,
+                            "external_reference": "#173823",
+                            "transaction_amount": monto
+                        }
+                    })
+                console.log(strbody)
+                fetch('https://api.mercadopago.com/instore/middleware/test/advanced_payments?access_token=APP_USR-2976629315334345-120513-c94af40d45e971069c101fec309641d8-493533927', {
+                    method: 'POST',
+                    body: strbody,
+                    headers: new Headers(),'X-Idempotency-Key': indep
+                    })
+                .then((res)=>{console.log(res);
+                return res.json();           
+                })
+                .then((data)=>{console.log(data.status);
+                    estadopago = data.status;
+                    console.log(estadopago);
+                    var sleepCheck = function() {
+                        if (estadopago == "approved") {
+                        return "Pago aprobado";}
+                        else {
+                        return "No pudo realizarse el pago";
+                        }
+                    }
+                    alert(sleepCheck());
+                })                    
+                .then((res)=>{ window.location.reload(); })
+                }    
+                ); 
+    </script> 
+
+
+ <!-- 
+<script>
+
+        function buscarCajas(){
+
+           
+                fetch('https://api.mercadopago.com/pos?access_token=APP_USR-2976629315334345-120513-c94af40d45e971069c101fec309641d8-493533927', {
+                    method: 'GET',
+                    headers: new Headers(),
+                    })
+                .then((res)=>{console.log(res);
+                return res.json();           
+                })
+                .then((data)=>{console.log(data.status);
+                    data2 = data.status;
+                    console.log(data2);
+                    var sleepCheck = function() {
+                        if (data2 == "approved") {
+                        return "Pago aprobado";}
+                        else {
+                        return "No pudo realizarse el pago";
+                        }
+                    }
+                    alert(sleepCheck());
+                })                    
+              .then((res)=>{ window.location.reload(); })
+        }    
+            
+        
+                    
+                
+        </script>
+
+    -->
+    <script>    
+            fetch('https://api.mercadopago.com/pos?access_token=APP_USR-8499883828799661-062409-bf057c51fc05f87eba5608328f869879-446566691')
+            .then((res)=>{
+                console.log(res);   
+                return res.json();    
+            })
+            .then((data)=>{
+                console.log(data.results)
+                cajas = data.results;
+                console.log(cajas) 
+            })
+            .then((post1)=>{
+                    var con = 0
+                    for (let index=0;index<100; index++){
+                        document.getElementById("cajas").innerHTML+=`
+                    <a class="dropdown-item" href="#">${cajas[index].external_id}</a>
+                        `
+                   con=con+1;            
+                    }
+                })
+                .catch(function(error){
+                    console.log(JSON.stringify(error));
+                })    
+                 
+           </script> 
+
+
+
+
+    <!-- <script>alert("hola soy un mensaje externo")</script>    -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
