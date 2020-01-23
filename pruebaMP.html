@@ -100,15 +100,7 @@
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop" onclick= modal()>
              Cobrar
              </button>
-             <div class="dropdown py-2">
-                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" hidden>
-                      Cajas
-                    </a>                  
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="cajas">
-                    </div>
-                  </div>
-            </div>
-        </div>
+              </div>
     </div>
 
   
@@ -198,67 +190,6 @@
                 }    
                 ); 
     </script> 
-
-
- <!-- 
-<script>
-
-        function buscarCajas(){
-
-           
-                fetch('https://api.mercadopago.com/pos?access_token=APP_USR-2976629315334345-120513-c94af40d45e971069c101fec309641d8-493533927', {
-                    method: 'GET',
-                    headers: new Headers(),
-                    })
-                .then((res)=>{console.log(res);
-                return res.json();           
-                })
-                .then((data)=>{console.log(data.status);
-                    data2 = data.status;
-                    console.log(data2);
-                    var sleepCheck = function() {
-                        if (data2 == "approved") {
-                        return "Pago aprobado";}
-                        else {
-                        return "No pudo realizarse el pago";
-                        }
-                    }
-                    alert(sleepCheck());
-                })                    
-              .then((res)=>{ window.location.reload(); })
-        }    
-            
-        
-                    
-                
-        </script>
-
-    -->
-    <script>    
-            fetch('https://api.mercadopago.com/pos?access_token=APP_USR-8499883828799661-062409-bf057c51fc05f87eba5608328f869879-446566691')
-            .then((res)=>{
-                console.log(res);   
-                return res.json();    
-            })
-            .then((data)=>{
-                console.log(data.results)
-                cajas = data.results;
-                console.log(cajas) 
-            })
-            .then((post1)=>{
-                    var con = 0
-                    for (let index=0;index<100; index++){
-                        document.getElementById("cajas").innerHTML+=`
-                    <a class="dropdown-item" href="#">${cajas[index].external_id}</a>
-                        `
-                   con=con+1;            
-                    }
-                })
-                .catch(function(error){
-                    console.log(JSON.stringify(error));
-                })    
-                 
-           </script> 
 
 
 
